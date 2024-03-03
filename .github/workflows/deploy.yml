@@ -31,7 +31,7 @@ jobs:
 #      - run: mkdir -p ~/.ssh
 #      - run: echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
       # Deploy
-      - run: apt-get update -qq
+#      - run: apt-get update -qq
       - run: apt-get install -qq git
       - run: 'which ssh-agent || ( apt-get install -qq openssh-client )'
       - run: eval $(ssh-agent -s)
