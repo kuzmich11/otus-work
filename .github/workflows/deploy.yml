@@ -35,7 +35,7 @@ jobs:
 #      - run: apt-get install -qq git
       - run: 'which ssh-agent || ( apt-get install -qq openssh-client )'
       - run: eval $(ssh-agent -s)
-      - run: ssh-add ~/.ssh < (echo "$SSH_PRIVATE_KEY" | base64 -d)
+      - run: ssh-add < (echo "$SSH_PRIVATE_KEY" | base64 -d)
       - run: mkdir -p ~/.ssh
       - run: echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
       - run: ssh $SSH_USER@$SERVER "sudo rm -rf /var/www/demo && cd /var/www && git clone git@github.com:kuzmich11/otus-work.git demo && sudo chown www-data:www-data demo -R && cd demo && sh ./deploy.sh $SERVER $DATABASE_HOST $DATABASE_USER $DATABASE_PASSWORD $DATABASE_NAME $RABBITMQ_HOST $RABBITMQ_USER $RABBITMQ_PASSWORD"
