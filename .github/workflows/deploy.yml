@@ -11,7 +11,7 @@ jobs:
     env:
       SERVER: ${{ vars.SERVER }}
       SSH_USER: ${{ vars.SSH_USER }}
-      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
       DATABASE_HOST: ${{ vars.DATABASE_HOST }}
       DATABASE_NAME: ${{ vars.DATABASE_NAME }}
       DATABASE_USER: ${{ vars.DATABASE_USER }}
