@@ -39,7 +39,7 @@ jobs:
 #      - run: mkdir -p ~/.ssh
 #      - run: echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
       - run: mkdir -p /home/runner/.ssh
-      - run: ssh-keyscan example.com >> /home/runner/.ssh/known_hosts
+      - run: ssh-keyscan $SERVER >> /home/runner/.ssh/known_hosts
       - run: echo "$SSH_PRIVATE_KEY" > /home/runner/.ssh/github_actions
       - run: chmod 600 /home/runner/.ssh/github_actions
       - run: ssh-agent -a $SSH_AUTH_SOCK > /dev/null
