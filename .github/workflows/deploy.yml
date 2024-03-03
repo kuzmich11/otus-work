@@ -30,5 +30,16 @@ jobs:
 #          RABBITMQ_HOST: localhost
 #          RABBITMQ_USER: developer
 #          RABBITMQ_PASSWORD: password`
+        env:
+          SERVER: ${{ vars.SERVER }}
+          SSH_USER: ${{ vars.SSH_USER }}
+          SSH_PRIVATE_KEY: ${{ vars.SSH_PRIVATE_KEY }}
+          DATABASE_HOST: ${{ vars.DATABASE_HOST }}
+          DATABASE_NAME: ${{ vars.DATABASE_NAME }}
+          DATABASE_USER: ${{ vars.DATABASE_USER }}
+          DATABASE_PASSWORD: ${{ vars.DATABASE_PASSWORD }}
+          RABBITMQ_HOST: ${{ vars.RABBITMQ_HOST }}
+          RABBITMQ_USER: ${{ vars.RABBITMQ_USER }}
+          RABBITMQ_PASSWORD: ${{ vars.RABBITMQ_PASSWORD }}`
         run: ssh $SSH_USER@$SERVER "sudo rm -rf /var/www/demo && cd /var/www && git clone git@github.com:kuzmich11/otus-work.git demo && sudo chown www-data:www-data demo -R && cd demo && sh ./deploy.sh $SERVER $DATABASE_HOST $DATABASE_USER $DATABASE_PASSWORD $DATABASE_NAME $RABBITMQ_HOST $RABBITMQ_USER $RABBITMQ_PASSWORD"
 
