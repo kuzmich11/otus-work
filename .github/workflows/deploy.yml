@@ -32,7 +32,7 @@ jobs:
 #      - run: echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
       # Deploy
 #      - run: apt-get update -qq
-      - run: apt-get install -qq git
+#      - run: apt-get install -qq git
       - run: 'which ssh-agent || ( apt-get install -qq openssh-client )'
       - run: eval $(ssh-agent -s)
       - run: ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
