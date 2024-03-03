@@ -20,8 +20,8 @@ jobs:
       RABBITMQ_USER: ${{ vars.RABBITMQ_USER }}
       RABBITMQ_PASSWORD: ${{ vars.RABBITMQ_PASSWORD }}`
     steps:
-
-#      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      #      - uses: actions/checkout@v4
       # before_script
 #      - run: apt-get update -qq
 #      - run: apt-get install -qq git
