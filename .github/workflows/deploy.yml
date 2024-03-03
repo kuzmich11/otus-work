@@ -21,7 +21,7 @@ jobs:
 #      - run: echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
       # Deploy
         env:
-          SERVER1: 195.58.54.221
+          SERVER: 195.58.54.221
           SSH_USER: root
           DATABASE_HOST: localhost
           DATABASE_NAME: otus
