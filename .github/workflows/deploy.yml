@@ -9,7 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: deploy
+#      - uses: actions/checkout@v4
       # before_script
 #      - run: apt-get update -qq
 #      - run: apt-get install -qq git
@@ -19,5 +20,15 @@ jobs:
 #      - run: mkdir -p ~/.ssh
 #      - run: echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
       # Deploy
-      - run: ssh $SSH_USER@$SERVER "sudo rm -rf /var/www/demo && cd /var/www && git clone git@github.com:kuzmich11/otus-work.git demo && sudo chown www-data:www-data demo -R && cd demo && sh ./deploy.sh $SERVER $DATABASE_HOST $DATABASE_USER $DATABASE_PASSWORD $DATABASE_NAME $RABBITMQ_HOST $RABBITMQ_USER $RABBITMQ_PASSWORD"
+        env:
+          SERVER1: 195.58.54.221
+          SSH_USER: root
+          DATABASE_HOST: localhost
+          DATABASE_NAME: otus
+          DATABASE_USER: developer
+          DATABASE_PASSWORD: password
+          RABBITMQ_HOST: localhost
+          RABBITMQ_USER: developer
+          RABBITMQ_PASSWORD: password`
+        run: ssh $SSH_USER@$SERVER "sudo rm -rf /var/www/demo && cd /var/www && git clone git@github.com:kuzmich11/otus-work.git demo && sudo chown www-data:www-data demo -R && cd demo && sh ./deploy.sh $SERVER $DATABASE_HOST $DATABASE_USER $DATABASE_PASSWORD $DATABASE_NAME $RABBITMQ_HOST $RABBITMQ_USER $RABBITMQ_PASSWORD"
 
