@@ -1,0 +1,22 @@
+old_sound_rabbit_mq:
+    connections:
+        default:
+            url: '%env(RABBITMQ_URL)%'
+
+    producers:
+        add_lessons:
+            connection: default
+            exchange_options: { name: 'old_sound_rabbit_mq.add_lessons', type: direct }
+
+    consumers:
+        add_lessons:
+            connection: default
+            exchange_options: { name: 'old_sound_rabbit_mq.add_lessons', type: direct }
+            queue_options: { name: 'old_sound_rabbit_mq.consumer.add_lessons' }
+            callback: App\Consumer\AddLessons\Consumer
+            idle_timeout: 300
+            idle_timeout_exit_code: 0
+            graceful_max_execution:
+                timeout: 1800
+                exit_code: 0
+            qos_options: { prefetch_size: 0, prefetch_count: 30, global: false }
