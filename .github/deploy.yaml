@@ -1,0 +1,22 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # before_script
+      - run: apt-get update -qq
+      - run: apt-get install -qq git
+      - run: 'which ssh-agent || ( apt-get install -qq openssh-client )'
+      - run: eval $(ssh-agent -s)
+      - run: ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 -d)
+      - run: mkdir -p ~/.ssh
+      - run: echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+      # Deploy
+      - run: ssh $SSH_USER@$SERVER1 "sudo rm -rf /var/www/demo && cd /var/www && git clone https://deploy:ZsZAGdePfH2QCoBYQkh2@gitlab.com/raptor-mvk/deploy-test.git demo && sudo chown www-data:www-data demo -R && cd demo && sh ./deploy.sh $SERVER1 $DATABASE_HOST $DATABASE_USER $DATABASE_PASSWORD $DATABASE_NAME $RABBITMQ_HOST $RABBITMQ_USER $RABBITMQ_PASSWORD"
