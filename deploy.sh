@@ -1,5 +1,5 @@
 cp ./deploy/nginx.conf /etc/nginx/conf.d/demo.conf -f
-sed -i -- "s/%\$SERVER%/$1/g" /etc/nginx/conf.d/demo.conf
+sed -i -- "s/%SERVER%/$1/g" /etc/nginx/conf.d/demo.conf
 service nginx restart
 composer install -q
 service php8.1-fpm restart
