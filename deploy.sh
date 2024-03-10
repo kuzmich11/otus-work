@@ -1,13 +1,13 @@
-cp ./deploy/nginx.conf /etc/nginx/conf.d/demo.conf -f
-sed -i -- "s|%SERVER%|$1|g" /etc/nginx/conf.d/demo.conf
-service nginx restart
-www-data composer install -q
-service php8.1-fpm restart
-www-data sed -i -- "s|%DATABASE_HOST%|$2|g" .env
-www-data sed -i -- "s|%DATABASE_USER%|$3|g" .env
-www-data sed -i -- "s|%DATABASE_PASSWORD%|$4|g" .env
-www-data sed -i -- "s|%DATABASE_NAME%|$5|g" .env
-www-data php bin/console doctrine:migrations:migrate --no-interaction
-www-data sed -i -- "s|%RABBITMQ_HOST%|$6|g" .env
-www-data sed -i -- "s|%RABBITMQ_USER%|$7|g" .env
-www-data sed -i -- "s|%RABBITMQ_PASSWORD%|$8|g" .env
+sudo cp ./deploy/nginx.conf /etc/nginx/conf.d/demo.conf -f
+sudo sed -i -- "s|%SERVER%|$SERVER|g" /etc/nginx/conf.d/demo.conf
+sudo service nginx restart
+sudo -u www-data composer install -q
+sudo service php8.1-fpm restart
+sudo -u www-data sed -i -- "s|%DATABASE_HOST%|$DATABASE_HOST|g" .env
+sudo -u www-data sed -i -- "s|%DATABASE_USER%|$DATABASE_USER|g" .env
+sudo -u www-data sed -i -- "s|%DATABASE_PASSWORD%|$DATABASE_PASSWORD|g" .env
+sudo -u www-data sed -i -- "s|%DATABASE_NAME%|$DATABASE_NAME|g" .env
+sudo -u www-data php bin/console doctrine:migrations:migrate --no-interaction
+sudo -u www-data sed -i -- "s|%RABBITMQ_HOST%|$RABBITMQ_HOST|g" .env
+sudo -u www-data sed -i -- "s|%RABBITMQ_USER%|$RABBITMQ_USER|g" .env
+sudo -u www-data sed -i -- "s|%RABBITMQ_PASSWORD%|$RABBITMQ_PASSWORD|g" .env
