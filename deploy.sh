@@ -1,4 +1,4 @@
-sudo cp ../../deploy/nginx.conf /etc/nginx/conf.d/demo.conf -f
+sudo cp ./deploy/nginx.conf /etc/nginx/conf.d/demo.conf -f
 sudo sed -i -- "s|%SERVER%|$1|g" /etc/nginx/conf.d/demo.conf
 sudo service nginx restart
 sudo -u www-data composer install -q
