@@ -44,5 +44,11 @@ jobs:
       - run: chmod 600 /home/runner/.ssh/github_actions
       - run: ssh-agent -a $SSH_AUTH_SOCK > /dev/null
       - run: ssh-add /home/runner/.ssh/github_actions
-      - run: ssh $SSH_USER@$SERVER rm -rf /var/www/demo && cd /var/www && echo y|git clone git@github.com:kuzmich11/otus-work.git demo && chown www-data:www-data demo -R && cd demo && sh ./deploy.sh $SERVER $DATABASE_HOST $DATABASE_USER $DATABASE_PASSWORD $DATABASE_NAME $RABBITMQ_HOST $RABBITMQ_USER $RABBITMQ_PASSWORD
+      - run: ssh $SSH_USER@$SERVER
+      - run: rm -rf /var/www/demo
+      - run: cd /var/www
+      - run: echo y|git clone git@github.com:kuzmich11/otus-work.git demo
+      - run: chown www-data:www-data demo -R
+      - run: cd demo
+      - run: sh ./deploy.sh $SERVER $DATABASE_HOST $DATABASE_USER $DATABASE_PASSWORD $DATABASE_NAME $RABBITMQ_HOST $RABBITMQ_USER $RABBITMQ_PASSWORD
 
