@@ -18,7 +18,7 @@ jobs:
       DATABASE_PASSWORD: ${{ vars.DATABASE_PASSWORD }}
       RABBITMQ_HOST: ${{ vars.RABBITMQ_HOST }}
       RABBITMQ_USER: ${{ vars.RABBITMQ_USER }}
-      RABBITMQ_PASSWORD: ${{ vars.RABBITMQ_PASSWORD }}`
+      RABBITMQ_PASSWORD: ${{ vars.RABBITMQ_PASSWORD }}
       SSH_AUTH_SOCK: /tmp/ssh_agent.sock
     steps:
 #      - uses: actions/checkout@v4
@@ -44,5 +44,13 @@ jobs:
       - run: chmod 600 /home/runner/.ssh/github_actions
       - run: ssh-agent -a $SSH_AUTH_SOCK > /dev/null
       - run: ssh-add /home/runner/.ssh/github_actions
-      - run: ssh $SSH_USER@$SERVER 'rm -rf /var/www/demo && cd /var/www && git clone git@github.com:kuzmich11/otus-work.git demo && chown www-data:www-data demo -R && cd demo && sh ./deploy.sh $SERVER $DATABASE_HOST $DATABASE_USER $DATABASE_PASSWORD $DATABASE_NAME $RABBITMQ_HOST $RABBITMQ_USER $RABBITMQ_PASSWORD'
-
+      - name: Deploy
+        run: ssh $SSH_USER@$SERVER 'rm -rf /var/www/demo && cd /var/www && git clone git@github.com:kuzmich11/otus-work.git demo && chown www-data:www-data demo -R && cd demo && sh ./deploy.sh $SERVER $DATABASE_HOST $DATABASE_USER $DATABASE_PASSWORD $DATABASE_NAME $RABBITMQ_HOST $RABBITMQ_USER $RABBITMQ_PASSWORD'
+        env:
+          DATABASE_HOST: ${{ vars.DATABASE_HOST }}
+          DATABASE_NAME: ${{ vars.DATABASE_NAME }}
+          DATABASE_USER: ${{ vars.DATABASE_USER }}
+          DATABASE_PASSWORD: ${{ vars.DATABASE_PASSWORD }}
+          RABBITMQ_HOST: ${{ vars.RABBITMQ_HOST }}
+          RABBITMQ_USER: ${{ vars.RABBITMQ_USER }}
+          RABBITMQ_PASSWORD: ${{ vars.RABBITMQ_PASSWORD }}
